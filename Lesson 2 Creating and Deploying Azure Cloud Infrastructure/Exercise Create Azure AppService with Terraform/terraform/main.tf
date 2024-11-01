@@ -1,14 +1,14 @@
 provider "azurerm" {
-  tenant_id       = "${var.tenant_id}"
-  subscription_id = "${var.subscription_id}"
-  client_id       = "${var.client_id}"
-  client_secret   = "${var.client_secret}"
+  tenant_id       = var.tenant_id
+  subscription_id = var.subscription_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
   features {}
 }
 terraform {
   backend "azurerm" {
     resource_group_name  = "tfstate"
-    storage_account_name = "tfstate9553"
+    storage_account_name = "tfstate29349"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
@@ -32,8 +32,8 @@ module "resource_group" {
 # Reference the AppService Module here.
 module "appservice" {
   source               = "./modules/appservice"
-  resource_group       = "var.resource_group"
-  location             = "var.location"
+  resource_group       = module.resource_group.resource_group_name
+  location             = var.location
   application_name     = "${var.application_type}-hehe"
-  tags = "${var.tags}"
+  tags = local.tags
 }
