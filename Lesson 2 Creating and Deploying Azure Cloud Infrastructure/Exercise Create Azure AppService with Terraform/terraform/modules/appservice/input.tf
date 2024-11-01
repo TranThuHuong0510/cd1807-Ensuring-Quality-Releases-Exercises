@@ -1,10 +1,9 @@
 # Resource Group/Location
-variable "" {}
-variable "" {}
-variable "" {}
-variable "" {}
+variable "location" {}
+variable "resource_group" {}
+variable "application_name" {}
 
 # Tags
 variable "tags" {
-  type = "map"
+  type = map(string)
 }

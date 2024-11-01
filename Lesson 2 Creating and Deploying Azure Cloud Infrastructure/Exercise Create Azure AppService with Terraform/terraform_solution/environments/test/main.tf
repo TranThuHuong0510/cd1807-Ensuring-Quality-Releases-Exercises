@@ -12,6 +12,12 @@ terraform {
     key                  = ""
     access_key           = ""
   }
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.8.0"  # Specify the version you want to use
+    }
+  }
 }
 locals {
   tags = {

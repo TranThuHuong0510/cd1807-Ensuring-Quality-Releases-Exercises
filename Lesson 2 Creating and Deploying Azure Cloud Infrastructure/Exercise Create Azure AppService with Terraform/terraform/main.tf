@@ -7,15 +7,33 @@ provider "azurerm" {
 }
 terraform {
   backend "azurerm" {
-    storage_account_name = ""
-    container_name       = ""
-    key                  = ""
-    access_key           = ""
+    resource_group_name  = "tfstate"
+    storage_account_name = "tfstate9553"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+   required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+    }
+  }
+}
+locals {
+  tags = {
+    tier        = "${var.tier}"
+    deployment  = "${var.deployment}"
   }
 }
 module "resource_group" {
-  source               = "../../modules/resource_group"
-  resource_group       = "${var.resource_group}"
-  location             = "${var.location}"
+  source               = "./modules/resource_group"
+  resource_group       = var.resource_group
+  location             = var.location
 }
 # Reference the AppService Module here.
+module "appservice" {
+  source               = "./modules/appservice"
+  resource_group       = "var.resource_group"
+  location             = "var.location"
+  application_name     = "${var.application_type}-hehe"
+  tags = "${var.tags}"
+}
