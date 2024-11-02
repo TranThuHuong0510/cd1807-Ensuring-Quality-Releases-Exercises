@@ -17,7 +17,7 @@ driver.find_element(By.ID, 'password').send_keys('secret_sauce')
 driver.find_element(By.ID, 'login-button').click()
 
 # Wait for the page to load
-time.sleep(2)  # Wait for 2 seconds
+ # Wait for 2 seconds
 
 # Find the search input element and enter the search term "sauce"
 # Note: Saucedemo website does not have a search box; we'll use the first available button as an example
@@ -34,6 +34,8 @@ driver.find_element(By.CSS_SELECTOR, add_to_cart_css_selector).click()
 # Validate that the product is added to the cart by checking the cart icon
 cart_icon = driver.find_element(By.CSS_SELECTOR, "a.shopping_cart_link")
 cart_item_count = cart_icon.text
+driver.find_element(By.CSS_SELECTOR, "a.shopping_cart_link").click()
+time.sleep(2) 
 
 # Print the number of items in the cart
 print(f"Number of items in the cart: {cart_item_count}")

@@ -9,7 +9,20 @@ import time
 driver = webdriver.Chrome()
 
 # Navigate to the specified URL using `driver.get()`.
-driver.get('https://www.saucedemo.com/')
+driver.get('https://www.selenium.dev/selenium/web/web-form.html')
+title = driver.title
+driver.implicitly_wait(0.5)
+text_box = driver.find_element(by=By.NAME, value="my-text")
+submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
+text_box.send_keys("Selenium")
+time.sleep(5) 
+submit_button.click()
+message = driver.find_element(by=By.ID, value="message")
+time.sleep(5)  # Wait for 5 seconds
+
+# Close the browser
+
+driver.quit()
 
 # Log in to the website
 
